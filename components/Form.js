@@ -29,7 +29,8 @@ export default function Form() {
         }
 
         // Call LOTW API
-        axios.get(baseURL, params)
+        // TODO: work around CORS error. Prob need to proxy.
+        axios.get(baseURL, { params })
         .then(response => {
             console.log(response);
         }).catch(error => {

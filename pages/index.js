@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Form from '../components/Form'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          
+          <Form />
         </div>
       </main>
 

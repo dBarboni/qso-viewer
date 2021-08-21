@@ -3,6 +3,9 @@ import styles from '../styles/Form.module.css'
 import axios from 'axios';
 
 export default function Form() {
+    // Get YYYY-MM-DD formatted date for date picker max property
+    const today = new Date().toISOString().slice(0, 10);
+
     const retrieveData = e => {
         // Prevent refresh
         e.preventDefault();
@@ -40,7 +43,7 @@ export default function Form() {
             <label htmlFor="password" className={styles.label}>Password</label>
             <input type="password" name="password" id="password" required className={styles.field} />
             <label htmlFor="date" className={styles.label}>Start Date</label>
-            <input type="date" name="date" id="date" className={styles.field} />
+            <input type="date" name="date" id="date" className={styles.field} max={today} />
             <button type="Submit">Submit</button>
         </form>
     )

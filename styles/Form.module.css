@@ -1,0 +1,15 @@
+/* Styling for form component */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.label {
+    padding-bottom: 0.5rem;
+}
+.field {
+    margin-bottom: 0.8rem;
+}
+.button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

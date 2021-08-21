@@ -20,7 +20,7 @@ export default function Home() {
           Fill out the form below to retrieve and display your QSOs. Pulls data from ARRL's <a href="https://lotw.arrl.org/">LOTW</a>.
         </p>
 
-        <div className={styles.grid}>
+        <div>
           <Form />
         </div>
       </main>

@@ -19,7 +19,7 @@ export default function Form() {
         let params = {
             qso_query: 1,
             login: e.target.call.value,
-            password: e.target.password.value
+            password: e.target.password.value // may need to convert to lowercase
         };
 
         // Add date param if not empty
@@ -28,9 +28,8 @@ export default function Form() {
             params.qso_startdate = startDate;
         }
 
-        // Call LOTW API
-        // TODO: work around CORS error. Prob need to proxy.
-        axios.get(baseURL, { params })
+        // Call LOTW API. Rewrite defined in next.config.js.
+        axios.get('/lotw', { params })
         .then(response => {
             console.log(response);
         }).catch(error => {

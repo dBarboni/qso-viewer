@@ -15,7 +15,6 @@ export default function Form() {
         // qso_startdate not req'd
 
         // Define base params
-        const baseURL = 'https://lotw.arrl.org/lotwuser/lotwreport.adi';
         let params = {
             qso_query: 1,
             login: e.target.call.value,
@@ -31,8 +30,29 @@ export default function Form() {
         // Call LOTW API. Rewrite defined in next.config.js.
         axios.get('/lotw', { params })
         .then(response => {
-            console.log(response);
+            //console.log(response.data);
+            // if <eoh> tag exists then succesfully got data
+            if (response.data.indexOf("<eoh>") !== -1) {
+                const adifString = response.data;
+                const firstItem = adifString.indexOf('<CALL');
+                if (firstItem !== -1) {
+                    // at least one record exists
+                    // format adif and parse to json
+                    let cleaned = adifString.slice(firstItem); // remove the header info
+                    cleaned = cleaned.replaceAll(/\/{2}.*/g, ""); // remove comments
+                    cleaned = cleaned.replaceAll(/\s+$/gm, ""); // trim blank space at EOL
+                    cleaned = cleaned.replaceAll(/\<(.*):\d+\>(.*)/g, "'$1':'$2'"); // format tags
+                    cleaned = cleaned.replace("<APP_LoTW_EOF>", ""); // remove EOF tag
+                    console.log(cleaned);
+                } else {
+                    // no records were found
+                }
+
+            } else { // else wrong credentials
+                console.log("wrong credentials");
+            }
         }).catch(error => {
+            // Error communicating with LOTW API
             console.log(error);
         });
     }

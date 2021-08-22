@@ -1,6 +1,7 @@
 // Form component
 import styles from '../styles/Form.module.css'
 import axios from 'axios';
+import AdifFormatter from '../modules/AdifFormatter'
 
 export default function Form() {
     // Get YYYY-MM-DD formatted date for date picker max property
@@ -36,19 +37,8 @@ export default function Form() {
             if (adifString.indexOf('<eoh>') !== -1) {
                 const firstItem = adifString.indexOf('<CALL');
                 if (firstItem !== -1) {
-                    // at least one record exists
-                    // format adif and parse to json
-                    let cleaned = adifString.slice(firstItem); // remove the header info
-                    cleaned = cleaned.replaceAll(/\/{2}.*/g, ''); // remove comments
-                    cleaned = cleaned.replaceAll(/\s+$/gm, ''); // trim blank space at EOL
-                    cleaned = cleaned.replaceAll(/\<(.*):\d+\>(.*)/g, '"$1":"$2",'); // format tags
-                    cleaned = cleaned.replaceAll('"CALL"', '{"CALL"'); // Add curly bracket before each record
-                    cleaned = cleaned.replaceAll('<eor>', '}'); // replace eor tags with closing curly bracket
-                    cleaned = cleaned.replaceAll(/}\s+\{/gm, '},{'); // add comma between brackets
-                    cleaned = cleaned.replaceAll(/,\s+}/gm, '}'); // remove comma after last key/value
-                    cleaned = cleaned.replace('<APP_LoTW_EOF>', ''); // remove EOF tag
-                    cleaned = '[' + cleaned + ']'; // wrap in brackets
-                    const records = JSON.parse(cleaned);
+                    // at least one record exists, convert adif string to JSON
+                    const records = AdifFormatter.convertToJSON(adifString, firstItem);
                     console.log(records);
                 } else {
                     // no records were found

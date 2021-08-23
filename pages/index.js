@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Form from '../components/Form'
 import styles from '../styles/Home.module.css'
+import DataHandler from '../modules/DataHandler'
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
         </p>
 
         <div>
-          <Form />
+          <Form onSubmit={DataHandler.retrieveRecords} />
         </div>
       </main>
 

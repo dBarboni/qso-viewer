@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import Form from '../components/Form'
 import styles from '../styles/Home.module.css'
-import DataHandler from '../modules/DataHandler'
+import Content from '../components/Content'
 
 export default function Home() {
   return (
@@ -21,9 +20,7 @@ export default function Home() {
           Fill out the form below to retrieve and display your QSOs. Pulls data from ARRL&apos;s <a href="https://lotw.arrl.org/">LOTW</a>.
         </p>
 
-        <div>
-          <Form onSubmit={DataHandler.retrieveRecords} />
-        </div>
+        <Content />
       </main>
 
       <footer className={styles.footer}>

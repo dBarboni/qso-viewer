@@ -1,13 +1,10 @@
-import axios from 'axios';
+import axios from 'axios'
 
 class DataHandler {
     constructor() {
 
     }
-    retrieveRecords = e => {
-        // Prevent refresh
-        e.preventDefault();
-
+    retrieveRecords = async e => {
         // Build query
         // Bare minimum needs login, password, qso_query params
         // qso_startdate not req'd
@@ -19,6 +16,8 @@ class DataHandler {
             password: e.target.password.value // may need to convert to lowercase
         };
 
+        let records = [];
+
         // Add date param if not empty
         const startDate = e.target.date.value;
         if (startDate !== '') {
@@ -26,7 +25,7 @@ class DataHandler {
         }
 
         // Call LOTW API. Rewrite defined in next.config.js.
-        axios.get('/lotw', { params })
+        return axios.get('/lotw', { params })
         .then(response => {
             //console.log(response.data);
             // if <eoh> tag exists then succesfully got data
@@ -35,18 +34,24 @@ class DataHandler {
                 const firstItem = adifString.indexOf('<CALL');
                 if (firstItem !== -1) {
                     // at least one record exists, convert adif string to JSON
-                    const records = this.convertToJSON(adifString, firstItem);
-                    console.log(records);
+                    records = this.convertToJSON(adifString, firstItem);
+                    const message = `Found ${records.length} records.`;
+                    return {records, message};
                 } else {
                     // no records were found
+                    const message = "No records were found.";
+                    return {records, message};
                 }
 
             } else { // else wrong credentials
-                console.log("wrong credentials");
+                const message = "The Call sign or password is incorrect.";
+                return {records, message};
             }
         }).catch(error => {
             // Error communicating with LOTW API
             console.log(error);
+            const message = "There was an error communicating with LOTW.";
+            return {records, message};
         });
     }
     convertToJSON = (adifString, firstItem) => {

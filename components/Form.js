@@ -15,5 +15,5 @@ export default function Form({ onSubmit }) {
             <input type="date" name="date" id="date" className={styles.field} max={today} />
             <button type="Submit">Submit</button>
         </form>
-    )
+    );
 }

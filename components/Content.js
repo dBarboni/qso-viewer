@@ -17,7 +17,7 @@ export default function Content() {
         const records = await DataHandler.retrieveRecords(e).then((data) => {
             // Update the state
             setMessage(data.message);
-            setRecords(data.records)
+            setRecords(data.records);
         });
     }
     
@@ -33,7 +33,7 @@ export default function Content() {
     return (
         <div>
             <Form onSubmit={getData} />
-            <Message>{message}</Message>
+            <Message type={records.length ? "success" : "error"}>{message}</Message>
             {records.length ? (
                 <CardWrapper>{buildCards()}</CardWrapper>
             ) : (

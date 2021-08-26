@@ -1,0 +1,7 @@
+/* Styles for message component */
+.message {
+    text-align: center;
+}
+.message--error {
+    color: red;
+}

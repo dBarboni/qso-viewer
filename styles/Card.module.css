@@ -14,3 +14,7 @@
 .item + .item {
     margin-top: 0.5rem;
 }
+.button {
+    margin-top: 1rem;
+    width: 100%;
+}

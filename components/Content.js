@@ -20,11 +20,18 @@ export default function Content() {
             setRecords(data.records);
         });
     }
+
+    // TODO: add a button on each card that opens a map
+    // query callook api
+    // show on map using react-simple-maps in modal overlay
+    const getLocation = callsign => {
+        console.log("Get location for", callsign);
+    }
     
     // Build the record list
     const buildCards = () => {
         const cards = Object.values(records).map(record => {
-            return <Card key={record.CALL} call={record.CALL} band={record.BAND} mode={record.MODE} qso_date={record.QSO_DATE} />;
+            return <Card key={record.CALL} call={record.CALL} band={record.BAND} mode={record.MODE} qso_date={record.QSO_DATE} onClick={() => getLocation(record.CALL) } />;
         });
         return cards;
     }

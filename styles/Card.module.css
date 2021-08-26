@@ -2,7 +2,6 @@
 .card {
     border: 1px solid black;
     padding: .75rem;
-    /* margin-bottom: 0.5rem; */
 }
 .item {
     margin: 0;
@@ -13,8 +12,4 @@
 }
 .item + .item {
     margin-top: 0.5rem;
-}
-.button {
-    margin-top: 1rem;
-    width: 100%;
 }

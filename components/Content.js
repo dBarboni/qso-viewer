@@ -4,6 +4,7 @@ import Message from './Message'
 import Card from './Card'
 import CardWrapper from './CardWrapper'
 import { useState } from 'react'
+import Map from './Map'
 
 // Wrapper for content
 export default function Content() {
@@ -21,9 +22,8 @@ export default function Content() {
         });
     }
 
-    // TODO: add a button on each card that opens a map
-    // query callook api
-    // show on map using react-simple-maps in modal overlay
+    // TODO: query callook api
+    // plot points on map
     const getLocation = callsign => {
         console.log("Get location for", callsign);
     }
@@ -42,7 +42,10 @@ export default function Content() {
             <Form onSubmit={getData} />
             <Message type={records.length ? "success" : "error"}>{message}</Message>
             {records.length ? (
-                <CardWrapper>{buildCards()}</CardWrapper>
+                <div>
+                    <CardWrapper>{buildCards()}</CardWrapper>
+                    <Map />
+                </div>
             ) : (
                 <div></div>
             )}

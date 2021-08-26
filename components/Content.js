@@ -1,6 +1,8 @@
 import Form from './Form'
 import DataHandler from '../modules/DataHandler'
 import Message from './Message'
+import Card from './Card'
+import CardWrapper from './CardWrapper'
 import { useState } from 'react'
 
 // Wrapper for content
@@ -22,7 +24,7 @@ export default function Content() {
     // Build the record list
     const buildCards = () => {
         console.log(records)
-        const cards = Object.values(records).map(record => <p key={record.CALL}>{record.CALL}</p>);
+        const cards = Object.values(records).map(record => <Card key={record.CALL} call={record.CALL} band={record.BAND} mode={record.MODE} qso_date={record.QSO_DATE} />);
         return cards;
     }
 
@@ -32,7 +34,7 @@ export default function Content() {
             <Form onSubmit={getData} />
             <Message>{message}</Message>
             {records.length ? (
-                <div>{buildCards()}</div>
+                <CardWrapper>{buildCards()}</CardWrapper>
             ) : (
                 <div></div>
             )}

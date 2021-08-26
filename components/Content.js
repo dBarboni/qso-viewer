@@ -1,26 +1,41 @@
 import Form from './Form'
 import DataHandler from '../modules/DataHandler'
 import Message from './Message'
-
-// Form submit data handler
-async function getData(e) {
-    e.preventDefault();
-    const records = await DataHandler.retrieveRecords(e).then((data) => {
-        console.log(data);
-        // Handle the response
-
-    });
-}
+import { useState } from 'react'
 
 // Wrapper for content
 export default function Content() {
-    let message = "Enter your credentials."; // Needs to change based on response
+    // Set default state
+    let [message, setMessage] = useState("Enter your credentials.");
+    let [records, setRecords] = useState([]);
 
+    // Form submit data handler
+    const getData = async e => {
+        e.preventDefault();
+        const records = await DataHandler.retrieveRecords(e).then((data) => {
+            // Update the state
+            setMessage(data.message);
+            setRecords(data.records)
+        });
+    }
+    
+    // Build the record list
+    const buildCards = () => {
+        console.log(records)
+        const cards = Object.values(records).map(record => <p key={record.CALL}>{record.CALL}</p>);
+        return cards;
+    }
+
+    // Render content based on state
     return (
         <div>
             <Form onSubmit={getData} />
             <Message>{message}</Message>
-            {/* <div>{DataHandler.records}</div> */}
+            {records.length ? (
+                <div>{buildCards()}</div>
+            ) : (
+                <div></div>
+            )}
         </div>
     );
 }

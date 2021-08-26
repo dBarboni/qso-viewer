@@ -1,7 +1,16 @@
 /* Styling for Card component */
 .card {
     border: 1px solid black;
+    padding: .75rem;
+    /* margin-bottom: 0.5rem; */
 }
-.item-main {
-    
+.item {
+    margin: 0;
+}
+.item:first-child {
+    font-weight: bold;
+    text-align: center;
+}
+.item + .item {
+    margin-top: 0.5rem;
 }

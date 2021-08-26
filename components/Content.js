@@ -23,8 +23,9 @@ export default function Content() {
     
     // Build the record list
     const buildCards = () => {
-        console.log(records)
-        const cards = Object.values(records).map(record => <Card key={record.CALL} call={record.CALL} band={record.BAND} mode={record.MODE} qso_date={record.QSO_DATE} />);
+        const cards = Object.values(records).map(record => {
+            return <Card key={record.CALL} call={record.CALL} band={record.BAND} mode={record.MODE} qso_date={record.QSO_DATE} />;
+        });
         return cards;
     }
 

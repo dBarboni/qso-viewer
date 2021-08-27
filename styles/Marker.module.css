@@ -1,27 +1,37 @@
 /* Map marker styles */
 
+/* contains both the marker and label */
 .container {
     transform: translate(-50%, -50%);
     transform-orgin: bottom center;
 }
 
+/* red circle */
 .marker {
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     background-color: #F00;
     border-radius: 50%;
+    border: 1px solid #000;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
+/* contains the text */
 .labelContainer {
     background-color: #FFF;
     border: 1px solid #000;
-    height: 2em;
-    width: 4rem;
+    border-top-right-radius: 50% 150%;
+    border-bottom-right-radius: 50% 150%;
+    height: 1.25rem;
+    width: 4.5rem;
     margin-bottom: 0.35rem;
-    text-align: center;
+    margin-left: 0.625rem;
 }
 
+/* the actual text */
 .label {
     font-weight: bold;
-    margin: 0.25rem 0;
+    margin: 0.25rem 0 0.25rem 0.8rem;
 }

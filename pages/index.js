@@ -17,7 +17,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Fill out the form below to retrieve and display your QSOs. Pulls data from ARRL&apos;s <a href="https://lotw.arrl.org/">LOTW</a>.
+          Fill out the form below to retrieve and display your QSOs. Pulls data from ARRL&apos;s <a href="https://lotw.arrl.org/">LOTW</a> and the <a href="https://callook.info/">CALLOOK</a> API.
         </p>
 
         <Content />

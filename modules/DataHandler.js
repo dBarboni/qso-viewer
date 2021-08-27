@@ -27,7 +27,6 @@ class DataHandler {
         // Call LOTW API. Rewrite defined in next.config.js.
         return axios.get('/lotw', { params })
         .then(response => {
-            //console.log(response.data);
             // if <eoh> tag exists then succesfully got data
             const adifString = response.data;
             if (adifString.indexOf('<eoh>') !== -1) {
@@ -62,9 +61,10 @@ class DataHandler {
                 return {
                     callSign,
                     lat: response.data.location.latitude,
-                    long: response.data.location.longitude
+                    lng: response.data.location.longitude
                 };
             }
+            return "Location not found";
         }).catch(error => {
             // Error communicating with callook API
             console.log(error);

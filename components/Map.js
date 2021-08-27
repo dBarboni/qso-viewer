@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
 import styles from '../styles/Map.module.css'
-import DataHandler from '../modules/DataHandler';
+import DataHandler from '../modules/DataHandler'
+import Marker from './Marker'
 
 class Map extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class Map extends Component {
             zoom: 4
         }
 
+        // Get location for callsigns if the records data is available
         if (this.state.records.length) {
             this.getLocations();
         }
@@ -28,7 +30,7 @@ class Map extends Component {
         const locations = this.state.records.forEach(async record => {
             const callSign = record.CALL;
             const location = await DataHandler.retrieveLocations(callSign).then(data => {
-                if (data) {
+                if (data.lat) {
                     // Add new location to array in state
                     this.setState({ markers: [...this.state.markers, data] });
                 } else {
@@ -47,6 +49,14 @@ class Map extends Component {
         return "Loading call sign data.";
     }
 
+    // Build list of markers
+    showMarkers() {
+        const markers = this.state.markers.map(marker => {
+            return <Marker label={marker.callSign} lat={marker.lat} lng={marker.lng}  />;
+        });
+        return markers;
+    }
+
     render() {
         return (
             // API key is defined in .env.local
@@ -57,7 +67,7 @@ class Map extends Component {
                     defaultCenter={this.state.center}
                     defaultZoom={this.state.zoom}
                 >
-
+                    {this.showMarkers()}
                 </GoogleMapReact>
             </div>
         );

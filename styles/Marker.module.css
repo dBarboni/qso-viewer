@@ -1,0 +1,26 @@
+/* Map marker styles */
+
+.container {
+    transform: translate(-50%, -50%);
+    transform-orgin: bottom center;
+    background-color: #fff;
+}
+
+.marker {
+    width: 20px;
+    height: 20px;
+    background-color: #F00;
+    border-radius: 50%;
+}
+
+.labelContainer {
+    /* background-color: #FFF;
+    border: 1px solid #F00;
+    display: block;
+    width: 100%; */
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}

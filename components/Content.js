@@ -6,6 +6,7 @@ import CardWrapper from './CardWrapper'
 import { useState } from 'react'
 import Map from './Map'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import styles from '../styles/Content.module.css'
 
 // Wrapper for content
 export default function Content() {
@@ -33,14 +34,14 @@ export default function Content() {
 
     // Render content based on state
     return (
-        <div>
+        <div className={styles.container}>
             <Form onSubmit={getData} />
             <Message type={records.length ? "success" : "error"}>{message}</Message>
             {records.length ? (
                 <Tabs>
-                    <TabList>
-                        <Tab>List</Tab>
-                        <Tab>Map</Tab>
+                    <TabList className={styles.tabList}>
+                        <Tab className={styles.tab}>List</Tab>
+                        <Tab className={styles.tab}>Map</Tab>
                     </TabList>
                     <TabPanel>
                         <CardWrapper>{buildCards()}</CardWrapper>

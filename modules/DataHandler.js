@@ -54,6 +54,22 @@ class DataHandler {
             return {records, message};
         });
     }
+    retrieveLocations = async (callSign) => {
+        // Query callook.info API
+        return axios.get(`https://callook.info/${callSign}/json`)
+        .then(response => {
+            if (response.data.location) {
+                return {
+                    callSign,
+                    lat: response.data.location.latitude,
+                    long: response.data.location.longitude
+                };
+            }
+        }).catch(error => {
+            // Error communicating with callook API
+            console.log(error);
+        });
+    }
     convertToJSON = (adifString, firstItem) => {
         // format adif and parse to json
         let cleaned = adifString.slice(firstItem); // remove the header info

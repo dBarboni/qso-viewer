@@ -21,13 +21,7 @@ export default function Content() {
             setRecords(data.records);
         });
     }
-
-    // TODO: query callook api
-    // plot points on map
-    const getLocation = callsign => {
-        console.log("Get location for", callsign);
-    }
-    
+     
     // Build the record list
     const buildCards = () => {
         const cards = Object.values(records).map(record => {
@@ -44,7 +38,7 @@ export default function Content() {
             {records.length ? (
                 <div>
                     <CardWrapper>{buildCards()}</CardWrapper>
-                    <Map />
+                    <Map records={records} />
                 </div>
             ) : (
                 <div></div>

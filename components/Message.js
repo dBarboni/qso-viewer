@@ -8,10 +8,13 @@ export default function Message({type, children}) {
     }
 
     // Determine styling for message
-    const messageType = (type === "success") ? "message" : "message--error";
+    let classNames = `${styles.message}`;
+    if (type === "error") {
+        classNames += ` ${styles.error}`;
+    }
 
     // Render content
     return (
-        <p className={styles[messageType]}>{children}</p>
+        <p className={classNames}>{children}</p>
     )
 }

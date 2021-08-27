@@ -5,6 +5,7 @@ import Card from './Card'
 import CardWrapper from './CardWrapper'
 import { useState } from 'react'
 import Map from './Map'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 // Wrapper for content
 export default function Content() {
@@ -36,10 +37,18 @@ export default function Content() {
             <Form onSubmit={getData} />
             <Message type={records.length ? "success" : "error"}>{message}</Message>
             {records.length ? (
-                <div>
-                    <CardWrapper>{buildCards()}</CardWrapper>
-                    <Map records={records} />
-                </div>
+                <Tabs>
+                    <TabList>
+                        <Tab>List</Tab>
+                        <Tab>Map</Tab>
+                    </TabList>
+                    <TabPanel>
+                        <CardWrapper>{buildCards()}</CardWrapper>
+                    </TabPanel>
+                    <TabPanel>
+                        <Map records={records} />
+                    </TabPanel>
+                </Tabs>
             ) : (
                 <div></div>
             )}

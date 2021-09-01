@@ -7,9 +7,9 @@ export default function Form({ onSubmit }) {
     
     return (
         <form onSubmit={onSubmit} className={styles.form}>
-            <label htmlFor="call" className={styles.label}>Call sign</label>
+            <label htmlFor="call" className={styles.label}>Call Sign</label>
             <input type="text" name="call" id="call" required className={styles.field} />
-            <label htmlFor="password" className={styles.label}>Password</label>
+            <label htmlFor="password" className={styles.label}>LOTW Password</label>
             <input type="password" name="password" id="password" required className={styles.field} />
             <label htmlFor="date" className={styles.label}>Start Date</label>
             <input type="date" name="date" id="date" className={styles.field} max={today} />

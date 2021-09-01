@@ -42,12 +42,16 @@ export default function Content() {
                     <TabList className={styles.tabList}>
                         <Tab className={styles.tab}>List</Tab>
                         <Tab className={styles.tab}>Map</Tab>
+                        <Tab className={styles.tab}>Charts</Tab>
                     </TabList>
                     <TabPanel>
                         <CardWrapper>{buildCards()}</CardWrapper>
                     </TabPanel>
                     <TabPanel>
                         <Map records={records} />
+                    </TabPanel>
+                    <TabPanel>
+                        <p>[placeholder]</p>
                     </TabPanel>
                 </Tabs>
             ) : (

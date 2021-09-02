@@ -7,12 +7,13 @@ import { useState } from 'react'
 import Map from './Map'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import styles from '../styles/Content.module.css'
+import PieChart from './PieChart'
 
 // Wrapper for content
 export default function Content() {
     // Set default state
-    let [message, setMessage] = useState("Enter your credentials.");
-    let [records, setRecords] = useState([]);
+    let [message, setMessage] = useState("Enter your credentials."); // Default message below form
+    let [records, setRecords] = useState([]); // All results from LOTW api
 
     // Form submit data handler
     const getData = async e => {
@@ -51,7 +52,7 @@ export default function Content() {
                         <Map records={records} />
                     </TabPanel>
                     <TabPanel>
-                        <p>[placeholder]</p>
+                        <PieChart records={records} />
                     </TabPanel>
                 </Tabs>
             ) : (

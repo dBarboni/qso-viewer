@@ -50,6 +50,27 @@ class Chart extends React.Component {
         }
     }
     buildPies = () => {
+        // Label generator
+        const RADIAN = Math.PI / 180;
+        const renderCustomLabel = ({ cx, cy, value, name, midAngle, innerRadius, outerRadius, percent, index }) => {
+            // get position for outer label
+            const radiusOut = innerRadius + (outerRadius - innerRadius) * 1.25;
+            const xOut = cx + radiusOut * Math.cos(-midAngle * RADIAN);
+            const yOut = cy + radiusOut * Math.sin(-midAngle * RADIAN);
+
+            // get position for inner label
+            const radiusIn = innerRadius + (outerRadius - innerRadius) * 0.25;
+            const xIn = cx + radiusIn * Math.cos(-midAngle * RADIAN);
+            const yIn = cy + radiusIn * Math.sin(-midAngle * RADIAN);
+
+            return (
+                <text textAnchor={xOut > cx ? 'start' : 'end'}>
+                    <tspan x={xOut} y={yOut}>{name} ({value})</tspan>
+                    <tspan x={xIn} y={yIn} fill="#fff">{`${(percent * 100).toFixed(0)}%`}</tspan>
+                </text>
+            );
+        };
+
         // Create pie chart for each property of interest (see constructor)
         let pies = [];
 
@@ -69,12 +90,11 @@ class Chart extends React.Component {
                     key={property}
                     isAnimationActive={false}
                     data={data}
-                    cx={(pies.length * 200) + 400}
+                    cx={(pies.length * 300) + 350}
                     cy="50%"
                     outerRadius={80}
                     fill="#8884d8"
-                    label
-                    className={styles.pie}
+                    label={renderCustomLabel}
                 >
                     {data.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={this.state.colors[index % this.state.colors.length]} />

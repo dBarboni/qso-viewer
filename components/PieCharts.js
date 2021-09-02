@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import styles from '../styles/PieChart.module.css'
 
 class Chart extends React.Component {
@@ -9,7 +9,10 @@ class Chart extends React.Component {
         const dataCounts = this.getDataCounts(props.records, "MODE", "BAND"); // records plus properties we are interested in charting
 
         // Initialize state
-        this.state = { dataCounts };
+        this.state = { 
+            dataCounts,
+            colors: ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#E05263"]
+         };
     }
     
     // Sum specified properties
@@ -59,21 +62,24 @@ class Chart extends React.Component {
                 data.push({ name: subprop, value: this.state.dataCounts[property][subprop]});
             }
 
-            // New pie component
+            // New pie component with colored slices
             const pie =
                 <Pie
                     dataKey="value"
                     key={property}
                     isAnimationActive={false}
                     data={data}
-                    // cx="50%"
                     cx={(pies.length * 200) + 400}
                     cy="50%"
                     outerRadius={80}
                     fill="#8884d8"
                     label
                     className={styles.pie}
-                />;
+                >
+                    {data.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={this.state.colors[index % this.state.colors.length]} />
+                    ))}
+                </Pie>;
 
             pies.push(pie);
         }

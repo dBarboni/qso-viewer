@@ -41,8 +41,8 @@ export default function Content() {
             {records.length ? (
                 <Tabs selectedTabClassName={styles.activeTab}>
                     <TabList className={styles.tabList}>
-                        <Tab>List</Tab>
-                        <Tab>Map</Tab>
+                        <Tab className={styles.tab}>List</Tab>
+                        <Tab className={styles.tab}>Map</Tab>
                     </TabList>
                     <TabPanel>
                         <CardWrapper>{buildCards()}</CardWrapper>

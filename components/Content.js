@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Map from './Map'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import styles from '../styles/Content.module.css'
-import PieChart from './PieChart'
+import PieCharts from './PieCharts'
 
 // Wrapper for content
 export default function Content() {
@@ -52,7 +52,7 @@ export default function Content() {
                         <Map records={records} />
                     </TabPanel>
                     <TabPanel>
-                        <PieChart records={records} />
+                        <PieCharts records={records} />
                     </TabPanel>
                 </Tabs>
             ) : (

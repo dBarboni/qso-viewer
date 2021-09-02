@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Map from './Map'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import styles from '../styles/Content.module.css'
+import 'react-tabs/style/react-tabs.css'
 
 // Wrapper for content
 export default function Content() {
@@ -38,10 +39,10 @@ export default function Content() {
             <Form onSubmit={getData} />
             <Message type={records.length ? "success" : "error"}>{message}</Message>
             {records.length ? (
-                <Tabs>
+                <Tabs selectedTabClassName={styles.activeTab}>
                     <TabList className={styles.tabList}>
-                        <Tab className={styles.tab}>List</Tab>
-                        <Tab className={styles.tab}>Map</Tab>
+                        <Tab>List</Tab>
+                        <Tab>Map</Tab>
                     </TabList>
                     <TabPanel>
                         <CardWrapper>{buildCards()}</CardWrapper>

@@ -54,21 +54,33 @@ class DataHandler {
         });
     }
     retrieveLocations = async (callSign) => {
-        // Query callook.info API
-        return axios.get(`https://callook.info/${callSign}/json`)
-        .then(response => {
-            if (response.data.location) {
-                return {
-                    callSign,
-                    lat: response.data.location.latitude,
-                    lng: response.data.location.longitude
-                };
-            }
-            return "Location not found";
-        }).catch(error => {
-            // Error communicating with callook API
-            console.log(error);
-        });
+        // Check local storage for cached result first
+        if (localStorage.getItem(callSign)) {
+            // Item exists, return from storage instead of api
+            const location = localStorage.getItem(callSign);
+            return JSON.parse(location);
+        } else {
+            // Query callook.info API
+            return axios.get(`https://callook.info/${callSign}/json`)
+            .then(response => {
+                if (response.data.location) {
+                    const newLoc = {
+                        callSign,
+                        lat: response.data.location.latitude,
+                        lng: response.data.location.longitude
+                    };
+
+                    // Cache result to local storage
+                    localStorage.setItem(callSign, JSON.stringify(newLoc));
+
+                    return newLoc;
+                }
+                return "Location not found";
+            }).catch(error => {
+                // Error communicating with callook API
+                console.log(error);
+            });
+        }
     }
     convertToJSON = (adifString, firstItem) => {
         // format adif and parse to json

@@ -52,7 +52,7 @@ class Map extends Component {
     // Build list of markers
     showMarkers() {
         const markers = this.state.markers.map(marker => {
-            return <Marker label={marker.callSign} lat={marker.lat} lng={marker.lng}  />;
+            return <Marker key={marker.callSign} label={marker.callSign} lat={marker.lat} lng={marker.lng}  />;
         });
         return markers;
     }
